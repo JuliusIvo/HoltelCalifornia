@@ -1,0 +1,68 @@
+﻿@using HotelProject.Data.Enums;
+@model Room
+@{
+    ViewData["Title"] = "Edit existing hotel room";
+}
+
+<div class="row">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Edit a hotel room</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Edit">
+                    <div asp-validation-summary="ModelOnly" class="text-danger">
+                    </div>
+                    <div class="form-group text-center">
+                        <img id="PictureUrlPreview" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PictureUrl" class="control-label"></label>
+                        <input asp-for="PictureUrl" class="form-control" />
+                        <span asp-validation-for="PictureUrl" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="AmountOfBeds" class="control-label"></label>
+                        <input asp-for="AmountOfBeds" class="form-control" />
+                        <span asp-validation-for="AmountOfBeds" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PricePerNight" class="control-label"></label>
+                        <input asp-for="PricePerNight" class="form-control" />
+                        <span asp-validation-for="PricePerNight" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="RoomType" class="control-label"></label>
+                        <select asp-for="@Model.RoomType" asp-items="Html.GetEnumSelectList<RoomType>()"></select>
+                        <span asp-validation-for="RoomType" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Update" class="btn btn-outline-success float-right" />
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show all</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('PictureUrlPreview');
+            output.src = $("#PictureUrl").val();
+        })
+
+        $("#PictureUrl").on("change", function () {
+            var output = document.getElementById('PictureUrlPreview');
+            output.src = $(this).val();
+        })
+    </script>
+}
